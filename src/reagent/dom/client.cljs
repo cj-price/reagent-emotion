@@ -1,5 +1,6 @@
 (ns reagent.dom.client
-  (:require ["react" :as react]
+  (:require ["@emotion/react" :as emotion]
+            ["react" :as react]
             ["react-dom/client" :as react-dom-client]
             [reagent.impl.batching :as batch]
             [reagent.impl.protocols :as p]
@@ -38,7 +39,7 @@
          ;; At least this moves the as-element call to the reagent-root
          ;; render, and handles the *always-update* binding correctly?
          comp (fn [] (p/as-element compiler el))]
-     (.render root (react/createElement reagent-root #js {:comp comp})))))
+     (.render root (emotion/jsx reagent-root #js {:comp comp})))))
 
 (defn hydrate-root
   ([container el]
@@ -46,4 +47,4 @@
   ([container el {:keys [compiler on-recoverable-error identifier-prefix]
                   :or {compiler tmpl/*current-default-compiler*}}]
    (let [comp (fn [] (p/as-element compiler el))]
-     (react-dom-client/hydrateRoot container (react/createElement reagent-root #js {:comp comp})))))
+     (react-dom-client/hydrateRoot container (emotion/jsx reagent-root #js {:comp comp})))))

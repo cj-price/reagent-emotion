@@ -1,7 +1,8 @@
 (ns reagent.core
   (:require-macros [reagent.core])
   (:refer-clojure :exclude [partial atom flush])
-  (:require [react :as react]
+  (:require ["@emotion/react" :as emotion]
+            [react :as react]
             [reagent.impl.template :as tmpl]
             [reagent.impl.component :as comp]
             [reagent.impl.util :as util]
@@ -35,13 +36,13 @@
    (create-element type nil))
   ([type props]
    (assert-js-object props)
-   (react/createElement type props))
+   (emotion/jsx type props))
   ([type props child]
    (assert-js-object props)
-   (react/createElement type props child))
+   (emotion/jsx type props child))
   ([type props child & children]
    (assert-js-object props)
-   (apply react/createElement type props child children)))
+   (apply emotion/jsx type props child children)))
 
 (defn as-element
   "Turns a vector of Hiccup syntax into a React element. Returns form

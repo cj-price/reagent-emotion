@@ -1,5 +1,6 @@
 (ns reagent.impl.template
-  (:require [react :as react]
+  (:require ["@emotion/react" :as emotion]
+            [react :as react]
             [clojure.string :as string]
             [reagent.impl.util :as util :refer [named?]]
             [reagent.impl.component :as comp]
@@ -128,12 +129,12 @@
 (defn make-element [this argv component jsprops first-child]
   (case (- (count argv) first-child)
     ;; Optimize cases of zero or one child
-    0 (react/createElement component jsprops)
+    0 (emotion/jsx component jsprops)
 
-    1 (react/createElement component jsprops
+    1 (emotion/jsx component jsprops
                            (p/as-element this (nth argv first-child nil)))
 
-    (.apply react/createElement nil
+    (.apply emotion/jsx nil
             (reduce-kv (fn [a k v]
                          (when (>= k first-child)
                           (.push a (p/as-element this v)))
@@ -160,7 +161,7 @@
     (set! (.-argv jsprops) v)
     (when-some [key (util/react-key-from-vec v)]
       (set! (.-key jsprops) key))
-    (react/createElement c jsprops)))
+    (emotion/jsx c jsprops)))
 
 (defn function-element [tag v first-arg compiler]
   (let [jsprops #js {}]
@@ -169,7 +170,7 @@
     ; (set! (.-opts jsprops) opts)
     (when-some [key (util/react-key-from-vec v)]
       (set! (.-key jsprops) key))
-    (react/createElement (comp/functional-render-fn compiler tag) jsprops)))
+    (emotion/jsx (comp/functional-render-fn compiler tag) jsprops)))
 
 (defn maybe-function-element
   "If given tag is a Class, use it as a class,

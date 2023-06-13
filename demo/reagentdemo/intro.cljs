@@ -325,6 +325,22 @@
                     :complete true
                     :src (s/src-of nil "todomvc/core.cljs")}]])
 
+(defn emotion-component []
+  [:div {:css {:color            "darkorchid !important"
+               :background-color "lightgray"}}
+   "This is darkorchid"])
+
+(defn emotion-demo []
+  [:div.demo-text
+   [:h2 "Emotion"]
+
+   [:p "This component uses emotion's " [:code ":css"] " prop to make css-in-js easy with reagent."]
+
+   [demo-component {:comp emotion-component
+                    :src (s/src-of [:emotion-component])}]
+
+   [:p [:i "Note:"] " "[:code "!important"] " is required for this demo, but is not needed outside of this demo."]])
+
 (defn main []
   (let [show-all (r/atom false)
         head "Reagent: Minimalistic React for ClojureScript"]
@@ -339,4 +355,5 @@
        [performance]
        ;; Show heavy examples on load, to make html file smaller
        (when @show-all [complete-simple-demo])
-       (when @show-all [todomvc-demo])])))
+       (when @show-all [todomvc-demo])
+       (when @show-all [emotion-demo])])))
