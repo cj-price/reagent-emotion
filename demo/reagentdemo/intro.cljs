@@ -4,7 +4,8 @@
             [reagentdemo.syntax :as s]
             [reagentdemo.common :as common :refer [demo-component]]
             [simpleexample.core :as simple]
-            [todomvc.core :as todo]))
+            [todomvc.core :as todo]
+            [emotion.core :as emotion]))
 
 (defn simple-component []
   [:div
@@ -325,6 +326,20 @@
                     :complete true
                     :src (s/src-of nil "todomvc/core.cljs")}]])
 
+(defn emotion-component []
+  [:div {:css {:background-color "pink"}}
+   "worked"])
+
+(defn emotion-demo []
+  [:div.demo-text
+   [:h2 "Emotion"]
+
+   [:p "This demo uses a compiler to implement the " [:code ":css"] " from emotion."]
+
+   [demo-component {:comp emotion/simple-example
+                    :complete true
+                    :src (s/src-of nil "emotion/core.cljs")}]])
+
 (defn main []
   (let [show-all (r/atom false)
         head "Reagent: Minimalistic React for ClojureScript"]
@@ -332,6 +347,7 @@
     (fn []
       [:div.reagent-demo
        [:h1 head]
+       [emotion-demo]
        [intro]
        [managing-state]
        [essential-api]

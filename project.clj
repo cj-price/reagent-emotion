@@ -27,7 +27,7 @@
                                   [cljsjs/react "18.2.0-1"]
                                   [cljsjs/react-dom "18.2.0-1"]
                                   [cljsjs/react-dom-server "18.2.0-1"]]
-                   :source-paths ["demo" "test" "examples/todomvc/src" "examples/simple/src" "examples/geometry/src"]
+                   :source-paths ["demo" "test" "examples/todomvc/src" "examples/simple/src" "examples/geometry/src" "examples/emotion/src"]
                    :resource-paths ["site" "target/cljsbuild/client" "target/cljsbuild/client-npm"]}}
 
   :clean-targets ^{:protect false} [:target-path :compile-path "out"]

@@ -1,4 +1,4 @@
-{:source-paths ["src" "test" "examples/todomvc/src" "examples/simple/src" "examples/geometry/src" "demo"]
+{:source-paths ["src" "test" "examples/todomvc/src" "examples/simple/src" "examples/geometry/src" "examples/emotion/src" "demo"]
  :dev-http {8090 {:roots ["site/public" "target/shadow-cljs/client/public" "classpath:public"]}}
  :builds
  {:client {:target :browser
